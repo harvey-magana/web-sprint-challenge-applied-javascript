@@ -20,12 +20,10 @@ axios.get("https://lambda-times-backend.herokuapp.com/topics")
 .then((successResponse) => {
   //console.log(successResponse.data.topics, "the data");
   Object.values(successResponse.data.topics).forEach( (url) => {
-      console.log(url);
     let newTopic = document.createElement('div');
     newTopic.classList.add('tab');
     newTopic.textContent = url;
-    //newTopic.appendChild(key)
-    console.log(newTopic)
+    //console.log(newTopic)
     entry.appendChild(newTopic);
   })
 })
