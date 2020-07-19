@@ -22,7 +22,10 @@
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 
 let cardMaker = (data) => {
-    console.log(data)
+    //console.log(data[0])
+    //console.log(data[1])
+    //console.log(data)
+    //console.log(data)
     let card = document.createElement('div');
     let headline = document.createElement('div');
     let author = document.createElement('div');
@@ -44,6 +47,14 @@ let cardMaker = (data) => {
     author.appendChild(cardAuthor);
     card.appendChild(headline);
     card.appendChild(author);
+
+    //console.log(Object.entries(data[1][1]))
+
+    card.addEventListener('click', () => {
+        console.log(data[0]);
+        //console.log(Object.entries(data[1][1]))
+    })
+
     return card;
 }
 
