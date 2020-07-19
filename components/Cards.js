@@ -22,8 +22,7 @@
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 
 let cardMaker = (data) => {
-    //console.log(data)
-    console.log(data[1][0])
+    console.log(data)
     let card = document.createElement('div');
     let headline = document.createElement('div');
     let author = document.createElement('div');
@@ -38,7 +37,7 @@ let cardMaker = (data) => {
 
     headline.textContent = data[0];
     cardImg.setAttribute('src', data[1][0].authorPhoto)
-    cardAuthor.textContent = data[0][1].authorName;
+    cardAuthor.textContent = "By " + data[1][0].authorName;
 
     imgContainer.appendChild(cardImg);
     author.appendChild(imgContainer);
