@@ -21,11 +21,9 @@
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 
+
 let cardMaker = (data) => {
-    //console.log(data[0])
-    //console.log(data[1])
-    //console.log(data)
-    //console.log(data)
+
     let card = document.createElement('div');
     let headline = document.createElement('div');
     let author = document.createElement('div');
@@ -38,9 +36,13 @@ let cardMaker = (data) => {
     author.classList.add('author');
     imgContainer.classList.add('img-container');
 
-    headline.textContent = data[0];
-    cardImg.setAttribute('src', data[1][0].authorPhoto)
-    cardAuthor.textContent = "By " + data[1][0].authorName;
+    for(let i = 0, len = data[0].length; i < len; i++) {
+        for(let j = 0, len = data[1].length; i < len; i++) {
+            headline.textContent = data[1][j]['headline']
+            cardImg.setAttribute('src', data[1][j]['authorPhoto']);
+            cardAuthor.textContent = "By " + data[1][j]['authorName'];
+        }
+    }
 
     imgContainer.appendChild(cardImg);
     author.appendChild(imgContainer);
@@ -48,26 +50,52 @@ let cardMaker = (data) => {
     card.appendChild(headline);
     card.appendChild(author);
 
-    //console.log(Object.entries(data[1][1]))
-
     card.addEventListener('click', () => {
-        console.log(data[0]);
-        //console.log(Object.entries(data[1][1]))
+        console.log(event.target)
+        for(let i = 0, len = data[0].length; i < len; i++) {
+            for(let j = 0, len = data[1].length; i < len; i++) {
+
+                let card = document.createElement('div');
+                let headline = document.createElement('div');
+                let author = document.createElement('div');
+                let imgContainer = document.createElement('div');
+                let cardImg = document.createElement('img');
+                let cardAuthor = document.createElement('span');
+            
+                card.classList.add('card');
+                headline.classList.add('headline');
+                author.classList.add('author');
+                imgContainer.classList.add('img-container');
+    
+                headline.textContent = data[1][j]['headline']
+                cardImg.setAttribute('src', data[1][j]['authorPhoto']);
+                cardAuthor.textContent = "By " + data[1][j]['authorName'];
+                console.log(cardAuthor)
+                imgContainer.appendChild(cardImg);
+                author.appendChild(imgContainer);
+                author.appendChild(cardAuthor);
+                card.appendChild(headline);
+                card.appendChild(author);
+            }
+        }
+        console.log(card);
     })
 
     return card;
 }
 
-let entry = document.querySelector('.cards-container');
+let cardsEntry = document.querySelector('.cards-container');
 
 axios.get("https://lambda-times-backend.herokuapp.com/articles")
 .then((successResponse) => {
-  //console.log(successResponse.data, "the data");
-  Object.entries(successResponse.data.articles).forEach( (key, val) => {
-    let newArticle = cardMaker(key);
-    entry.appendChild(newArticle);
+  //console.log(successResponse.data.articles, "the data");
+  Object.entries(successResponse.data.articles).forEach( (url) => {
+    let newArticle = cardMaker(url);
+    cardsEntry.appendChild(newArticle);
   })
 })
 .catch((errorResponse) => {
   console.log('error!', errorResponse);
 })
+
+

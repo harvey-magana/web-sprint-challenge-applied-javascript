@@ -14,7 +14,14 @@
 
 
 
-let entry = document.querySelector('.topics');
+let tabEntry = document.querySelector('.topics');
+
+tabEntry.addEventListener('click', () => {
+    //console.log(tabEntry.children.textContent);
+    if(event.target) {
+        console.log(tabEntry.children.textContent);
+    }
+})
 
 axios.get("https://lambda-times-backend.herokuapp.com/topics")
 .then((successResponse) => {
@@ -23,8 +30,8 @@ axios.get("https://lambda-times-backend.herokuapp.com/topics")
     let newTopic = document.createElement('div');
     newTopic.classList.add('tab');
     newTopic.textContent = url;
-    //console.log(newTopic)
-    entry.appendChild(newTopic);
+    //console.log(url)
+    tabEntry.appendChild(newTopic);
   })
 })
 .catch((errorResponse) => {

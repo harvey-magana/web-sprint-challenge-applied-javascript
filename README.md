@@ -27,10 +27,13 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What is the DOM?
+    The Document Object Model is a language agnostic representation web page structure used for building or updating web pages. 
 
 2. What is an event?
+    An event is an action on a web page that is monitored by an event listener that can trigger the execution of a fuction. 
 
 3. What is an event listener?
+    
 
 4. Why would we convert a NodeList into an Array?
 
