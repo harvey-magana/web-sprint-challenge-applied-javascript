@@ -23,7 +23,7 @@
 
 
 let cardMaker = (data) => {
-
+    console.log(data)
     let card = document.createElement('div');
     let headline = document.createElement('div');
     let author = document.createElement('div');
@@ -36,13 +36,9 @@ let cardMaker = (data) => {
     author.classList.add('author');
     imgContainer.classList.add('img-container');
 
-    for(let i = 0, len = data[0].length; i < len; i++) {
-        for(let j = 0, len = data[1].length; i < len; i++) {
-            headline.textContent = data[1][j]['headline']
-            cardImg.setAttribute('src', data[1][j]['authorPhoto']);
-            cardAuthor.textContent = "By " + data[1][j]['authorName'];
-        }
-    }
+    headline.textContent = data.headline;
+    cardImg.setAttribute('src', data['authorPhoto']);
+    cardAuthor.textContent = "By " + data['authorName'];
 
     imgContainer.appendChild(cardImg);
     author.appendChild(imgContainer);
@@ -50,8 +46,9 @@ let cardMaker = (data) => {
     card.appendChild(headline);
     card.appendChild(author);
 
+    /*
     card.addEventListener('click', () => {
-        console.log(event.target)
+        console.log(data.headline)
         for(let i = 0, len = data[0].length; i < len; i++) {
             for(let j = 0, len = data[1].length; i < len; i++) {
 
@@ -79,20 +76,36 @@ let cardMaker = (data) => {
             }
         }
         console.log(card);
-    })
+    })*/
 
     return card;
 }
 
-let cardsEntry = document.querySelector('.cards-container');
+//let cardsEntry = document.querySelector('.cards-container');
 
 axios.get("https://lambda-times-backend.herokuapp.com/articles")
 .then((successResponse) => {
-  //console.log(successResponse.data.articles, "the data");
-  Object.entries(successResponse.data.articles).forEach( (url) => {
-    let newArticle = cardMaker(url);
-    cardsEntry.appendChild(newArticle);
-  })
+  //console.log(successResponse.data, "the data");
+    successResponse.data.articles.javascript.forEach(element => {
+        const cardparent = document.querySelector('.cards-container');
+        cardparent.append(cardMaker(element))
+    })
+    successResponse.data.articles.bootstrap.forEach(element => {
+    const cardparent = document.querySelector('.cards-container');
+    cardparent.append(cardMaker(element))
+    })
+    successResponse.data.articles.technology.forEach(element => {
+        const cardparent = document.querySelector('.cards-container');
+        cardparent.append(cardMaker(element))
+    })
+    successResponse.data.articles.jquery.forEach(element => {
+        const cardparent = document.querySelector('.cards-container');
+        cardparent.append(cardMaker(element))
+    })
+    successResponse.data.articles.node.forEach(element => {
+        const cardparent = document.querySelector('.cards-container');
+        cardparent.append(cardMaker(element))
+    })
 })
 .catch((errorResponse) => {
   console.log('error!', errorResponse);
